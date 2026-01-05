@@ -15,7 +15,7 @@ const onlineUsers = new Map<string, string>();
 export const initializeSocket = (httpServer: HTTPServer) => {
   io = new Server(httpServer, {
     cors: {
-      origin: Env.FRONTEND_ORIGIN,
+      origin: "http://localhost:5173",
       methods: ["GET", "POST"],
       credentials: true,
     },
@@ -30,7 +30,7 @@ export const initializeSocket = (httpServer: HTTPServer) => {
       const token = rawCookie?.split("=")?.[1]?.trim();
       if (!token) return next(new Error("Unauthorized"));
 
-      const decodedToken = jwt.verify(token, Env.JWT_SECRET) as {
+      const decodedToken = jwt.verify(token, "secret_jwt") as {
         userId: string;
       };
       if (!decodedToken) return next(new Error("Unauthorized"));

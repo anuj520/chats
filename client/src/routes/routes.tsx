@@ -3,6 +3,17 @@ import SignUp from "@/pages/auth/sign-up";
 import Chat from "@/pages/chat";
 import SingleChat from "@/pages/chat/chatId";
 
+// first code pages
+import { About } from "@/pages/Other/About/about";
+import { StudentDashboard } from "@/pages/Other/studentDasbord";
+import { Forums } from "@/pages/Other/Froms/froms";
+import { Projects } from "@/pages/Other/Project";
+import { Research } from "@/pages/Other/Reserch";
+import { Webinars } from "@/pages/Other/webiners";
+import { Home } from "@/pages/Other/home";
+import { Contact } from "@/pages/Other/Contect/contect";
+import Dashboard from "@/pages/Other/dasbord/dasbord";
+
 export const AUTH_ROUTES = {
   SIGN_IN: "/",
   SIGN_UP: "/sign-up",
@@ -11,6 +22,18 @@ export const AUTH_ROUTES = {
 export const PROTECTED_ROUTES = {
   CHAT: "/chat",
   SINGLE_CHAT: "/chat/:chatId",
+  STUDENT_DASHBOARD: "/studentdashboard",
+};
+
+export const PUBLIC_ROUTES = {
+   HOME: "/home",
+  ABOUT: "/about",
+  CONTACT: "/contact",
+  FORUMS: "/forums",
+  PROJECTS: "/projects",
+  RESEARCH: "/research",
+  WEBINARS: "/webinars",
+  DasBord:"/dasbord"
 };
 
 export const authRoutesPaths = [
@@ -32,6 +55,46 @@ export const protectedRoutesPaths = [
   {
     path: PROTECTED_ROUTES.SINGLE_CHAT,
     element: <SingleChat />,
+  },
+  {
+    path: PROTECTED_ROUTES.STUDENT_DASHBOARD,
+    element: <StudentDashboard />,
+  },
+];
+
+export const publicRoutesPaths = [
+
+   {
+    path: PUBLIC_ROUTES.HOME,
+    element: <Home/>,
+  },
+  {
+    path: PUBLIC_ROUTES.ABOUT,
+    element: <About />,
+  },
+  {
+    path: PUBLIC_ROUTES.CONTACT,
+    element: <Contact />,
+  },
+  {
+    path: PUBLIC_ROUTES.FORUMS,
+    element: <Forums />,
+  },
+  {
+    path: PUBLIC_ROUTES.PROJECTS,
+    element: <Projects />,
+  },
+  {
+    path: PUBLIC_ROUTES.RESEARCH,
+    element: <Research />,
+  },
+  {
+    path: PUBLIC_ROUTES.WEBINARS,
+    element: <Webinars />,
+  },
+   {
+    path: PUBLIC_ROUTES.DasBord,
+    element: <Dashboard />,
   },
 ];
 

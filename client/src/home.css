@@ -1,0 +1,175 @@
+/* ---------- hero base (your existing rules kept) ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4a5568 100%);
+  padding: 80px 60px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+  z-index: 1;
+}
+
+.hero-left {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-title {
+  font-size: 72px;
+  font-weight: 900;
+  color: #000;
+  margin: 0 0 20px 0;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: #000;
+  margin: 0 0 40px 0;
+  line-height: 1.5;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-primary {
+  background: #3b5bdb;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  /* -webkit-transition:;
+  -moz-transition:;
+  -ms-transition:;
+  -o-transition:; */
+}
+
+.btn-primary:hover {
+  background: #2f4bb8;
+}
+
+.btn-secondary {
+  background: white;
+  color: #000;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-secondary:hover {
+  background: #f1f3f5;
+}
+
+
+/* Initial state + animation properties for each card */
+/* Initial state */
+/* ---------- hero-right and cards ---------- */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* NEW SMOOTH VERTICAL INFINITE ANIMATION */
+.hero-right {
+  width: 320px;
+  height: 330px;
+  overflow: hidden;
+}
+/* TRACK THAT MOVES — ADD THIS */
+.hero-right-track {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: scrollVertical 10s linear infinite;
+  will-change: transform;
+  -webkit-animation: scrollVertical 10s linear infinite;
+}
+
+/* updated infinite animation */
+.hero-right .hero-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  padding: 20px 24px;
+  border-radius: 16px;
+  min-height: 72px;
+
+}
+
+/* delays */
+.hero-right .hero-card:nth-child(1) { animation-delay: 0s; }
+.hero-right .hero-card:nth-child(2) { animation-delay: 1.5s; }
+.hero-right .hero-card:nth-child(3) { animation-delay: 3s; }
+.hero-right .hero-card:nth-child(4) { animation-delay: 4.5s; }
+
+/* keyframes */
+/* SAVED VERTICAL SCROLL ANIMATION */
+@keyframes scrollVertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%); /* Half the height → seamless if duplicated */
+  }
+}
+
+.hero-card-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.hero-card-content h3 {
+  margin: 0 0 4px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+}
+
+.hero-card-content p {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}

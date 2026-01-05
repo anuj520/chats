@@ -7,8 +7,10 @@ import { useAuth } from "@/hooks/use-auth";
 import { useChat } from "@/hooks/use-chat";
 import useChatId from "@/hooks/use-chat-id";
 import { useSocket } from "@/hooks/use-socket";
+import { API } from "@/lib/axios-client";
 import type { MessageType } from "@/types/chat.type";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const SingleChat = () => {
   const chatId = useChatId();
@@ -22,11 +24,37 @@ const SingleChat = () => {
   const chat = singleChat?.chat;
   const messages = singleChat?.messages || [];
 
-  useEffect(() => {
-    if (!chatId) return;
-    fetchSingleChat(chatId);
-  }, [fetchSingleChat, chatId]);
+// 1) Fetch once when chatId changes
+useEffect(() => {
+  if (!chatId) return;
+  fetchSingleChat(chatId);
+}, [chatId]);
 
+useEffect(() => {
+  if (!chatId) return;
+
+  let previousLength = singleChat?.messages?.length || 0; // current length
+
+  const interval = setInterval(async () => {
+    try {
+      const { data } = await API.get(`/chat/${chatId}`);
+      const newLength = data.messages.length;
+
+      // check if new messages exist
+      if (newLength > previousLength) {
+        fetchSingleChat(chatId);           // real function call
+        previousLength = newLength;        // update length
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }, 1000); // every 1 sec
+
+  return () => clearInterval(interval);
+}, [chatId, singleChat?.messages?.length]);
+
+  
   //Socket Chat room
   useEffect(() => {
     if (!chatId || !socket) return;

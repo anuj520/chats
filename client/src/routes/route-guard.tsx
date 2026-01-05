@@ -10,7 +10,7 @@ const RouteGuard = ({ requireAuth }: Props) => {
 
   if (requireAuth && !user) return <Navigate to="/" replace />;
 
-  if (!requireAuth && user) return <Navigate to="/chat" replace />;
+  if (!requireAuth && user) return <Navigate to={"/home"} replace />;
 
   return <Outlet />;
 };

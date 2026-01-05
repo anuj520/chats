@@ -1,0 +1,317 @@
+/* webinars.css - corrected & cleaned */
+
+/* ----------------------------------------
+   Theme variables
+----------------------------------------- */
+:root {
+  --card-bg: #ffffff;
+  --muted: #6b7280;
+  --accent: #3b5bdb;
+  --accent-2: #2f4bb8;
+  --gap: 28px;
+  --slide-duration: 6s;
+}
+
+/* ----------------------------------------
+   Section Layout
+----------------------------------------- */
+.webinars {
+  background: linear-gradient(180deg, #eaf6ff 0%, #ffffff 40%);
+  padding: 40px 24px 80px;
+  box-sizing: border-box;
+  overflow: hidden; /* prevents vertical scrollbars */
+}
+
+.webinars-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.webinars-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 8px 0 18px;
+  color: #0f172a;
+}
+
+/* ----------------------------------------
+   Search Bar & Top Row
+----------------------------------------- */
+.webinars-search-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  flex: 1;
+  max-width: 900px;
+}
+
+.search-icon {
+  color: #9ca3af;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #111827;
+  width: 100%;
+}
+
+.btn-host {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(59, 91, 219, 0.12);
+}
+
+/* ----------------------------------------
+   Webinars Sliding Grid (animation lives here)
+----------------------------------------- */
+/* NOTE: animation translates the entire grid LEFT and teleports it back RIGHT
+   so it appears to be cycling items. Ensure .webinars-grid is wide enough visually
+   (we render cards normally; the translateX values are percentages of the grid's width). */
+
+.webinars-grid {
+  display: flex;
+  gap: var(--gap);
+  margin-top: 12px;
+  overflow-x:auto;
+&::-webkit-scrollbar{
+  display: none;
+}
+
+}
+
+/* pause on hover for readability */
+.webinars-grid:hover {
+  animation-play-state: paused;
+}
+
+/* Each webinar card */
+.webinar-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+  transition: transform 1s ease, box-shadow 260ms ease;
+  pointer-events: auto;
+  flex: 0 0 calc((100% - (2 * var(--gap))) / 3);
+  /*3cardspervisiblerow*/box-sizing: border-box;
+  -webkit-transition: transform 1s ease, box-shadow 260ms ease;
+  -moz-transition: transform 1s ease, box-shadow 260ms ease;
+  -ms-transition: transform 1s ease, box-shadow 260ms ease;
+  -o-transition: transform 1s ease, box-shadow 260ms ease;
+}
+
+/* Hover lift for a card */
+.webinar-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  -webkit-transform: translateY(-8px);
+  -moz-transform: translateY(-8px);
+  -ms-transform: translateY(-8px);
+  -o-transform: translateY(-8px);
+}
+
+/* ----------------------------------------
+   Card Content
+----------------------------------------- */
+.webinar-image {
+  height: 140px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #e5e7eb, #f3f4f6);
+  margin-bottom: 14px;
+}
+
+.webinar-card-title {
+  font-size: 18px;
+  margin: 0 0 8px 0;
+  color: #0f172a;
+}
+
+.webinar-card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 0 0 14px 0;
+  flex: 1;
+}
+
+.webinar-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary-small {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Author section */
+.webinar-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #d1d5db;
+}
+
+.author-text {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.author-name {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* ----------------------------------------
+   Animation: RIGHT → LEFT infinite loop (fixed & clean)
+----------------------------------------- */
+/* Explanation:
+   - 0%..20%: stay in place
+   - 20%..50%: slide left out of view
+   - 55%: fade out
+   - 56%: teleport to right while invisible
+   - 70%..90%: slide toward center and fade in
+   - 100%: back to resting position
+*/
+@keyframes webinarSlide {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+}
+
+  20% {
+    transform: translateX(0);
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+}
+
+  50% {
+    transform: translateX(-140%);
+    opacity: 1;
+    -webkit-transform: translateX(-140%);
+    -moz-transform: translateX(-140%);
+    -ms-transform: translateX(-140%);
+    -o-transform: translateX(-140%);
+}
+
+  55% {
+    opacity: 0;
+  }
+
+  56% {
+    transform: translateX(140%);
+    opacity: 0;
+    -webkit-transform: translateX(140%);
+    -moz-transform: translateX(140%);
+    -ms-transform: translateX(140%);
+    -o-transform: translateX(140%);
+}
+
+  70% {
+    transform: translateX(60%);
+    opacity: 0;
+    -webkit-transform: translateX(60%);
+    -moz-transform: translateX(60%);
+    -ms-transform: translateX(60%);
+    -o-transform: translateX(60%);
+}
+
+  85% {
+    transform: translateX(20%);
+    opacity: 0.6;
+  }
+
+  95% {
+    transform: translateX(5%);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------
+   Responsive Layout
+----------------------------------------- */
+@media (max-width: 980px) {
+  .webinars-grid {
+    flex-wrap: wrap;
+    animation: none; /* disable sliding on small screens for UX */
+  }
+  .webinar-card {
+    flex: 1 1 calc(50% - (var(--gap) / 2));
+  }
+}
+
+@media (max-width: 640px) {
+  .webinars-search-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .webinar-card {
+    flex: 1 1 100%;
+  }
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .webinars-grid {
+    animation: none !important;
+    transform: none !important;
+  }
+  .webinar-card {
+    transition: none !important;
+  }
+}

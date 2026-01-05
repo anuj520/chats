@@ -94,16 +94,15 @@ export const useChat = create<ChatState>()((set, get) => ({
   },
 
   fetchSingleChat: async (chatId: string) => {
-    set({ isSingleChatLoading: true });
     try {
-      const { data } = await API.get(`/chat/${chatId}`);
+      const { data } = await API.get(`/chat/${chatId}`);;
       set({ singleChat: data });
     } catch (error: any) {
       toast.error(error?.response?.data?.message || "Failed to fetch chats");
-    } finally {
-      set({ isSingleChatLoading: false });
-    }
+    } 
   },
+  
+
 
   sendMessage: async (payload: CreateMessageType) => {
     set({ isSendingMsg: true });

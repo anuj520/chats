@@ -10,8 +10,8 @@ type Cookie = {
 
 export const setJwtAuthCookie = ({ res, userId }: Cookie) => {
   const payload = { userId };
-  const expiresIn = Env.JWT_EXPIRES_IN as Time;
-  const token = jwt.sign(payload, Env.JWT_SECRET, {
+  const expiresIn = "30d" as Time;
+  const token = jwt.sign(payload, "secret_jwt", {
     audience: ["user"],
     expiresIn: expiresIn || "7d",
   });
@@ -19,8 +19,8 @@ export const setJwtAuthCookie = ({ res, userId }: Cookie) => {
   return res.cookie("accessToken", token, {
     maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    secure: Env.NODE_ENV === "production" ? true : false,
-    sameSite: Env.NODE_ENV === "production" ? "strict" : "lax",
+    secure:  true ,
+    sameSite:  "strict" 
   });
 };
 

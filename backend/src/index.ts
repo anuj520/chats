@@ -14,10 +14,8 @@ import { initializeSocket } from "./lib/socket";
 import routes from "./routes";
 
 import "./config/passport.config";
-
 const app = express();
 const server = http.createServer(app);
-
 //socket
 initializeSocket(server);
 
@@ -26,7 +24,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: Env.FRONTEND_ORIGIN,
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
@@ -44,8 +42,6 @@ app.get(
 );
 
 app.use("/api", routes);
-
-if (Env.NODE_ENV === "production") {
   const clientPath = path.resolve(__dirname, "../../client/dist");
 
   //Serve static files
@@ -54,11 +50,9 @@ if (Env.NODE_ENV === "production") {
   app.get(/^(?!\/api).*/, (req: Request, res: Response) => {
     res.sendFile(path.join(clientPath, "index.html"));
   });
-}
-
 app.use(errorHandler);
 
-server.listen(Env.PORT, async () => {
+server.listen(8000, async () => {
   await connectDatabase();
-  console.log(`Server running on port ${Env.PORT} in ${Env.NODE_ENV} mode`);
+  console.log(`Server running on port 8000 in  mode`);
 });
