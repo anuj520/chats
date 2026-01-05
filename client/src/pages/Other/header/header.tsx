@@ -40,7 +40,7 @@ export const Headers=()=>{
                     </li>
                 </ul>
                 <div className="button">
-                    <NavLink to="/chat">
+                    <NavLink to="/sign-in">
                       <button className="join">
                         <span className="line2">Join</span>
                         <span className="line2"> Now</span> 

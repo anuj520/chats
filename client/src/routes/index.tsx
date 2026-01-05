@@ -1,6 +1,6 @@
 import BaseLayout from "@/layouts/base-layout";
 import { Route, Routes } from "react-router-dom";
-import { authRoutesPaths, protectedRoutesPaths, publicRoutesPaths } from "./routes";
+import { authRoutesPaths, protectedRoutesPaths } from "./routes";
 import AppLayout from "@/layouts/app-layout";
 import RouteGuard from "./route-guard";
 
@@ -23,11 +23,6 @@ const AppRoutes = () => {
           ))}
         </Route>
       </Route>
-       <Route path="/" element={<RouteGuard requireAuth={true} />}>
-          {publicRoutesPaths?.map((route) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
-        </Route>
     </Routes>
   );
 };

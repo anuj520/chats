@@ -6,13 +6,15 @@ import {
 } from "../ui/input-group";
 import { NewChatPopover } from "./newchat-popover";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/use-auth";
 
 const ChatListHeader = ({ onSearch }: { onSearch: (val: string) => void }) => {
+const { logout } = useAuth();
   return (
     <div className="px-3 py-3 border-b border-border">
       <div className="flex items-center justify-between mb-3">
         <h1 className="text-xl font-semibold">Chat</h1>
-          <Link to={"/home"}>home</Link>
+          <Link to={"/"} onClick={logout}>home</Link>
         <div>
           {/* NewChatPopover */}
           <NewChatPopover />

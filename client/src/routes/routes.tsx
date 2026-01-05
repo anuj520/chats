@@ -15,18 +15,9 @@ import { Contact } from "@/pages/Other/Contect/contect";
 import Dashboard from "@/pages/Other/dasbord/dasbord";
 
 export const AUTH_ROUTES = {
-  SIGN_IN: "/",
+  SIGN_IN: "/sign-in",
   SIGN_UP: "/sign-up",
-};
-
-export const PROTECTED_ROUTES = {
-  CHAT: "/chat",
-  SINGLE_CHAT: "/chat/:chatId",
-  STUDENT_DASHBOARD: "/studentdashboard",
-};
-
-export const PUBLIC_ROUTES = {
-   HOME: "/home",
+  HOME: "/",
   ABOUT: "/about",
   CONTACT: "/contact",
   FORUMS: "/forums",
@@ -36,6 +27,13 @@ export const PUBLIC_ROUTES = {
   DasBord:"/dasbord"
 };
 
+export const PROTECTED_ROUTES = {
+  CHAT: "/chat",
+  SINGLE_CHAT: "/chat/:chatId",
+  STUDENT_DASHBOARD: "/studentdashboard",
+};
+
+
 export const authRoutesPaths = [
   {
     path: AUTH_ROUTES.SIGN_IN,
@@ -44,6 +42,38 @@ export const authRoutesPaths = [
   {
     path: AUTH_ROUTES.SIGN_UP,
     element: <SignUp />,
+  },
+   {
+    path: AUTH_ROUTES.HOME,
+    element: <Home/>,
+  },
+  {
+    path: AUTH_ROUTES.ABOUT,
+    element: <About />,
+  },
+  {
+    path: AUTH_ROUTES.CONTACT,
+    element: <Contact />,
+  },
+  {
+    path: AUTH_ROUTES.FORUMS,
+    element: <Forums />,
+  },
+  {
+    path: AUTH_ROUTES.PROJECTS,
+    element: <Projects />,
+  },
+  {
+    path: AUTH_ROUTES.RESEARCH,
+    element: <Research />,
+  },
+  {
+    path: AUTH_ROUTES.WEBINARS,
+    element: <Webinars />,
+  },
+   {
+    path: AUTH_ROUTES.DasBord,
+    element: <Dashboard />,
   },
 ];
 
@@ -62,41 +92,6 @@ export const protectedRoutesPaths = [
   },
 ];
 
-export const publicRoutesPaths = [
-
-   {
-    path: PUBLIC_ROUTES.HOME,
-    element: <Home/>,
-  },
-  {
-    path: PUBLIC_ROUTES.ABOUT,
-    element: <About />,
-  },
-  {
-    path: PUBLIC_ROUTES.CONTACT,
-    element: <Contact />,
-  },
-  {
-    path: PUBLIC_ROUTES.FORUMS,
-    element: <Forums />,
-  },
-  {
-    path: PUBLIC_ROUTES.PROJECTS,
-    element: <Projects />,
-  },
-  {
-    path: PUBLIC_ROUTES.RESEARCH,
-    element: <Research />,
-  },
-  {
-    path: PUBLIC_ROUTES.WEBINARS,
-    element: <Webinars />,
-  },
-   {
-    path: PUBLIC_ROUTES.DasBord,
-    element: <Dashboard />,
-  },
-];
 
 export const isAuthRoute = (pathname: string) => {
   return Object.values(AUTH_ROUTES).includes(pathname);
